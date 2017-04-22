@@ -8,23 +8,45 @@ const PORT = process.env.PORT || 8080
 
 app.use(bodyParser.json());
 
-app.set('views', __dirname + '/client/src/components/index');
+app.set('views', __dirname + 'views');
 app.set('view engine', 'ejs');
 
+app.use(express.static(path.join(__dirname, '../build')))
 
-app.get('/', function(req, res) {
-  res.render('./client/src/components/index')
-})
+app.get('/api/getwisdom', function(req, res) {
+  db('wisdom').select('*').then((data) => {
 
-app.get('/wisdom', function(req, res) {
-  db.select().table('wisdom').then((data) => {
     res.send(data)
   })
-  .catch((err) => {
-    console.error('Error getting data')
-    res.status(501).send(err)
+})
+
+app.get('/api/userWisdom/:userName', function(req, res) {
+  db('wisdom').select('*').where({user: req.params.userName}).then((data) => {
+
+    res.send(data)
+  })
+  console.log('THE PARAMS', req.params)
+  // res.end();
+})
+app.post('/api/wisdom', function(req, res) {
+  console.log(req.body);
+  db('wisdom').insert({user: req.body.username, lesson: req.body.text}).then(() => {
+   res.status(201).send()
   })
 })
+// app.get('/', function(req, res) {
+//   res.render('tran')
+// })
+
+// app.get('/wisdom', function(req, res) {
+//   db.select().table('wisdom').then((data) => {
+//     res.send(data)
+//   })
+//   .catch((err) => {
+//     console.error('Error getting data')
+//     res.status(501).send(err)
+//   })
+// })
 
 app.listen(PORT, () => {
   console.log('App is listening on: ', PORT)
