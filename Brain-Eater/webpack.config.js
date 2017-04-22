@@ -3,7 +3,7 @@ var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
   template: __dirname + '/client/index.html',
   filename: 'index.html',
   inject: 'body'
-});
+}); 
 
 module.exports = {
     entry: __dirname + '/client/src/index.js',
