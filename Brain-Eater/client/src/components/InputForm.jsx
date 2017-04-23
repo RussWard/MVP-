@@ -1,20 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Bootstrap from 'bootstrap';
+import App from './App.js'
 
-var size = 'display-heigth, '
 const InputForm = () => (
+  //  constructor(props) {
+  //   super(props);
+
+  //   this.state = {
+  //     userText: null
+  //   }
+  // }  
+
+  // render() { 
+  //   var saveText = function(e) {
+  //     this.setState({
+  //       userText: e.target.value
+  //     })
+  //   }
+    
+  //   var insertWisdom = function() {
+  //     this.props.postWisdom(this.state.userText)
+  //   }
+    
+    // return (
     <form>
       <label>
         What wisdom have you gained today?:
         <div>
-          <textarea className="" type="text" />
+          <textarea className="" type="text" className="wisdomBox" />
+          <input type="submit" value="Submit" />
         </div>
       </label>
-    <input type="submit" value="Submit" />
   </form>
-
+//     )
+//  }
+    
 )
-
 
 export default InputForm;
